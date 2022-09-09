@@ -1,2 +1,3 @@
 # ENGI301
-Fall 2022 ENGI 301 Class Project Repository
+Repository for ENGI301 course work Fall 2022
+
