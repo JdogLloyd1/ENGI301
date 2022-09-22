@@ -4,7 +4,7 @@
 Simple Calculator
 --------------------------------------------------------------------------
 License:   
-Copyright 2022 - <NAME>
+Copyright 2022 - Jonathan Lloyd
 
 Redistribution and use in source and binary forms, with or without 
 modification, are permitted provided that the following conditions are met:
@@ -54,6 +54,8 @@ Error conditions:
 
 # NOTE - Add import statements to allow access to Python library functions
 
+import operator
+
 # ------------------------------------------------------------------------
 # Constants
 # ------------------------------------------------------------------------
@@ -63,6 +65,14 @@ Error conditions:
 # ------------------------------------------------------------------------
 # Global variables
 # ------------------------------------------------------------------------
+
+operators = {
+    "+" : operator.add,
+    "-" : operator.sub,
+    "*" : operator.mul,
+    "/" : operator.truediv
+    }
+# Dictionary variable to switch between different inputs
 
 # NOTE - Need a global variable to map an operator string (e.g. "+") to 
 # NOTE - the appropriate function.
@@ -78,6 +88,23 @@ Error conditions:
 # NOTE -     """
 # NOTE - 
 # NOTE - User input is generally returned as a string and must be translated.
+
+def hello(): 
+    """ Get input from the user.
+        Returns tuple: (number, number, function) or
+        (None, None, None) if the inputs are invalid
+    """
+    try: 
+        number1 = float(input("Enter first number:"))
+        number2 = float(input("Enter second number:"))
+        op = input("Enter function (valid values are +,-,*,/):")
+        
+        func = operators.get(op)
+    except:
+        return (None, None, None)
+    
+    return(number1, number2, func)
+
 
 # ------------------------------------------------------------------------
 # Main script
@@ -95,10 +122,20 @@ Error conditions:
 if __name__ == "__main__":
     # NOTE - Use "pass" statements to allow code to be run without having to 
     # NOTE - fill out the contents.  This pass statement should be removed    
-    pass
-
+    # pass 
+    
     # NOTE - Need to add main calculator functionality:
     # NOTE -   - Use a loop construct to repeat the operation
     # NOTE -   - Get the input from the user (i.e. use function created above)    
     # NOTE -   - Check that all inputs are valid
     # NOTE -   - Execute the function on the numbers and print the results
+    
+    while True:
+        (num1, num2, func) = hello()
+        
+        if(num1 == None) or (num2 == None) or (func == None):
+            print("Invalid Input")
+            break
+        
+        print(func(num1, num2))
+
