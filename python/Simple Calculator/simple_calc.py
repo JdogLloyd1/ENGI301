@@ -70,7 +70,11 @@ operators = {
     "+" : operator.add,
     "-" : operator.sub,
     "*" : operator.mul,
-    "/" : operator.truediv
+    "/" : operator.truediv,
+    ">>": operator.rshift,
+    "<<": operator.lshift,
+    "%" : operator.mod,
+    "**": operator.pow
     }
 # Dictionary variable to switch between different inputs
 
@@ -97,7 +101,7 @@ def hello():
     try: 
         number1 = float(input("Enter first number:"))
         number2 = float(input("Enter second number:"))
-        op = input("Enter function (valid values are +,-,*,/):")
+        op = input("Enter function (valid values are +,-,*,/,>>,<<,%,**):")
         
         func = operators.get(op)
     except:
@@ -129,6 +133,12 @@ if __name__ == "__main__":
     # NOTE -   - Get the input from the user (i.e. use function created above)    
     # NOTE -   - Check that all inputs are valid
     # NOTE -   - Execute the function on the numbers and print the results
+    # NOTE -   - Ensure reverse compatibility with Python 2
+    
+    try:
+        input = raw_input
+    except NameError:
+        pass
     
     while True:
         (num1, num2, func) = hello()
