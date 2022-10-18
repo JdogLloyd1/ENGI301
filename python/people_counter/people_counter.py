@@ -3,7 +3,7 @@
 People Counter
 --------------------------------------------------------------------------
 License:   
-Copyright 2022 <Name>
+Copyright 2022 Jonathan Lloyd
 
 Redistribution and use in source and binary forms, with or without 
 modification, are permitted provided that the following conditions are met:
