@@ -3,7 +3,7 @@
 # People Counter - Configure Pins
 # --------------------------------------------------------------------------
 # License:   
-# Copyright 2020 <Name>
+# Copyright 2020 Jonathan Lloyd
 # 
 # Redistribution and use in source and binary forms, with or without 
 # modification, are permitted provided that the following conditions are met:
