@@ -73,11 +73,11 @@ class PokerRobot():
 
     # end def setup()
     
-  def dealBurn(self):
+  def deal_down(self):
     """Deal one card face down"""
     # Use this function for both dealing to players and burning cards in game
     
-    # end def dealBurn()
+    # end def deal_down()
   
   def deal_flip(self):
     """Deal one card face up"""
@@ -86,8 +86,16 @@ class PokerRobot():
     
     # end def deal_flip()
     
-  def deal_to_players(self)
-    
+  def deal_to_players(self, playerCount)
+    """Deal two cards to each player"""
+    # pull number of players
+    # split up players evenly on both sides OR pull locations
+    # calculate distances needed to travel 
+    # run for loop twice to deal_down() to each player clockwise around table, moving in between locstions each time
+    # return to starting location
+
+    # end def deal_to_players()
+
   def run(self):
     """Execute main program"""
     deckLoaded = False
@@ -96,6 +104,7 @@ class PokerRobot():
     while(True):
       # Display welcome screen
       # Screen 1: ask for number of players
+      # Stretch goal - place players around the table?
       # Prompt deck load
       # Check light sensor for deck loading
       # When loaded, proceed to deal in a circle along the rail, 1 card/player/cycle
@@ -113,6 +122,8 @@ class PokerRobot():
     # Set display to goodbye screen
     self.display.----
     
+    # return to starting position on rail
+    
     # end def cleanup()
     
   # end class
@@ -125,8 +136,9 @@ if __name__ == '__main__':
   
   try:
         # Run the program
-        pass  # Replace this line
+        self.run()
 
     except KeyboardInterrupt:
         # Clean up hardware when exiting
-        pass  # Replace this line
+        self.cleanup()
+        exit 
