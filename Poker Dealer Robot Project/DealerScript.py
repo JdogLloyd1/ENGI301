@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """
 Robot Texas Hold 'em Poker Card Dealer
 Jonathan Lloyd, November 2022
@@ -46,16 +45,28 @@ Dealer Robot that will
 
 import time
 import Adafruit_BBIO.GPIO as GPIO
+import Adafruit_BBIO.ADC as ADC
+import Adafruit_BBIO.PWM as PWM
+import servo as SERVO
 
 class PokerRobot():
   
   display = None
+  stepper = None
+  dcMotor = None
+  servo = None
+  lightSensor = None
   
-  def __init__(self, i2c_bus=1, i2c_address=---):
+  def __init__(self, stepper='', dcMotor='', servo='', lightSensor='', i2c_bus=1, i2c_address=''):
     """initialize variables and setup display"""
-    self.display = ----.----(i2c_bus, i2c_address)
+    
+    self.stepper = stepper
+    self.dcMotor = dcMotor
+    self.servo = SERVO.Servo(servo)
+    self.lightSensor = lightSensor
     
     # Touchscreen with I2C
+    self.display = ----.----(i2c_bus, i2c_address)
     
     self._setup()
    # end def init
@@ -63,38 +74,89 @@ class PokerRobot():
   def _setup(self):
     """Setup hardware components"""
     
+    # initialize analog input 
+    ADC.setup()
     # Stepper motor
     
     # DC motor
     
-    # Servo motor
-    
     # Light sensor
 
-    # end def setup()
+  # end def setup()
     
-  def deal_down(self):
+  def deal(self, tableSide):
     """Deal one card face down"""
     # Use this function for both dealing to players and burning cards in game
     
-    # end def deal_down()
-  
-  def deal_flip(self):
-    """Deal one card face up"""
-    # Activate flip barrier
-    # call dealBurn()
+    # set tableSide for whether DC motor to deal card will send to left or right side of the table
+    tableSide = 
+    # spin DC motor a set amount to shoot a card out 
     
-    # end def deal_flip()
     
-  def deal_to_players(self, playerCount)
+  # end def deal()
+    
+  def deal_to_players(self, playerCount):
     """Deal two cards to each player"""
     # pull number of players
     # split up players evenly on both sides OR pull locations
     # calculate distances needed to travel 
+    
     # run for loop twice to deal_down() to each player clockwise around table, moving in between locstions each time
     # return to starting location
 
-    # end def deal_to_players()
+  # end def deal_to_players()
+  
+  def flop(self):
+  
+  # burn 1 card
+  deal(tableSide = '')
+    
+    # raise flip barrier
+    self.servo.right()
+
+    # deal 3 cards - CHECK SYNTAX
+    for i=1:3:
+        # slide one card over on rail
+        deal(tableSide = '')
+
+
+  # end def flop()
+  
+  def turn(self):
+  
+    # lower flip barrier
+    self.servo.left() 
+
+    # slide back to burn pile and burn 1 card
+    deal(tableSide = '')
+
+    # raise flip barrier
+    self.servo.right()
+
+    # slide over to 4th card position on rail
+
+    # deal 1 card
+    deal(tableSide = '')
+  
+  # end def turn()
+  
+  def river(self):
+    
+    # lower flip barrier
+    self.servo.left() 
+
+    # slide back to burn pile and burn 1 card
+    deal(tableSide = '')
+
+    # raise flip barrier
+    self.servo.right()
+
+    # slide over to 5th card position on rail
+
+    # deal 1 card
+    deal(tableSide = '')
+  
+  # end def river()
 
   def run(self):
     """Execute main program"""
@@ -104,13 +166,22 @@ class PokerRobot():
     while(True):
       # Display welcome screen
       # Screen 1: ask for number of players
+      playerCount = ''
       # Stretch goal - place players around the table?
       # Prompt deck load
       # Check light sensor for deck loading
+      # Lower flip barrier
+      self.servo.left()
       # When loaded, proceed to deal in a circle along the rail, 1 card/player/cycle
+      deal_to_players(playerCount=playerCount)
+      
       # When betting complete, proceed to flop
+      self.flop() 
       # When betting complete, proceed to turn
+      self.turn()
       # When betting complete, proceed to river
+      self.river()
+      
       # Prompt for new hand or end game
       # If new game accepted, return to screen 1 with previous # of players pre-loaded
     
@@ -124,9 +195,16 @@ class PokerRobot():
     
     # return to starting position on rail
     
-    # end def cleanup()
     
-  # end class
+    # Clean up GPIOs
+    GPIO.cleanup()
+    
+    # Stop servo
+    self.servo.cleanup()
+    
+  # end def cleanup()
+    
+# end class
 
 # ------------------------------------------------------------------------
 # Main script
@@ -134,11 +212,12 @@ class PokerRobot():
 
 if __name__ == '__main__':
   
+  poker_robot = PokerRobot()
   try:
         # Run the program
-        self.run()
+        poker_robot.run()
 
     except KeyboardInterrupt:
         # Clean up hardware when exiting
-        self.cleanup()
+        poker_robot.cleanup()
         exit 
