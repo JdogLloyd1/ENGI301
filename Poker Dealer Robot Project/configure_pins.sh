@@ -42,6 +42,8 @@
 # --------------------------------------------------------------------------
 
 # I2C1
+config-pin '' i2c
+config-pin '' i2c
 
 # LCD Touchscreen
 
@@ -50,5 +52,7 @@
 # DC motor
     
 # Servo motor
-    
+config-pin '' pwm
+
 # Light sensor
+config-pin '' gpio
