@@ -1,0 +1,9 @@
+﻿ENGI 301 Project 2 Bill of Materials,,,,
+,,,,
+Designator,Manufacturer,Quantity,Description,Link
+Touchscreen,Adafruit,1,"2.8"" Resistive touchscreen",https://www.adafruit.com/product/1770
+Potentiometer,*Parts kit*,2,3 pin twist,
+Button,*Parts kit*,2,4 pin push button,
+LED,*House part*,1,Tri-Color RGB LED SMD PLCC-4,https://factory.macrofab.com/part/MF-LED-ASMB-RGB
+USB Port,*House part*,1,5 pin microUSB port,https://factory.macrofab.com/part/MF-CON-MICROUSB-RIGHT
+Resistor,*House part*,2,MF-RES-0603-1K,https://factory.macrofab.com/part/MF-RES-0603-1K
